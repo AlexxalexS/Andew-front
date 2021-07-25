@@ -1,16 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <ExampleComponent />
+    <h1>main</h1>
+    <nav>
+      <ul>
+        <li><a href="/portfolio">Портфолио</a></li>
+      </ul>
+    </nav>
+    <!--    <img alt="Vue logo" src="../assets/logo.png" style="height: 50px" />-->
   </div>
 </template>
 
 <script>
-import ExampleComponent from "@/components/ExampleComponent";
 
 export default {
   name: "Home",
-  components: { ExampleComponent },
 };
 </script>
 

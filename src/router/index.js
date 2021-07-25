@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import ImagePalette from "../views/ImagePalette";
+import Portfolio from "../views/Portfolio";
 
 Vue.use(VueRouter);
 
@@ -10,6 +12,17 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  {
+    path: "/portfolio",
+    name: "Portfolio",
+    component: Portfolio
+  },
+  {
+    path: '/:id',
+    name: "ImagePalette",
+    props: true,
+    component: ImagePalette,
+  }
   // example
   /*
     {
