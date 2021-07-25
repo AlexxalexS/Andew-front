@@ -2,14 +2,16 @@
   <div class="portfolio">
     <h1>Галерея</h1>
     <br><br>
-    <div class="post">
-      <div v-for="post in posts" :key="post.id">
-        <a class="post__content"  :href="post.id">
-          <div class="post__title">{{ post.title.rendered }}</div>
-          <img class="post__image" :src="post.image" alt="">
-        </a>
+    <keep-alive>
+      <div class="post">
+        <div v-for="post in posts" :key="post.id">
+          <a class="post__content" :href="post.id">
+            <div class="post__title">{{ post.title.rendered }}</div>
+            <img class="post__image" :src="post.image" alt="">
+          </a>
+        </div>
       </div>
-    </div>
+    </keep-alive>
   </div>
 </template>
 
@@ -20,7 +22,8 @@ export default {
   name: "Portfolio",
   data() {
     return {
-      posts: []
+      posts: [],
+      load: true
     };
   },
 
@@ -43,7 +46,11 @@ export default {
             });
         });
         console.log(this.posts);
-      });
+        this.load = false
+      })
+    .catch(() => {
+      this.load = false
+    })
   }
 };
 </script>
@@ -106,6 +113,7 @@ export default {
 
   }
 }
+
 @media (max-width: 1000px) {
   .post {
     grid-template-columns: repeat(2, 1fr);

@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <h1>main</h1>
+    <div class="header">
+      <div class="container">
+        <img src="" alt="logo">
+      </div>
+    </div>
     <nav>
       <ul>
         <li><a href="/portfolio">Портфолио</a></li>
@@ -17,12 +21,19 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .home {
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  .header {
+    .container {
+      max-width: 1280px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  //display: flex;
+  //height: 100%;
+  //justify-content: center;
+  //flex-direction: column;
+  //align-items: center;
 }
 </style>

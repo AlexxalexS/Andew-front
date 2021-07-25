@@ -1,5 +1,5 @@
 module.exports = {
-/*  filenameHashing: false,
+ filenameHashing: false,
   productionSourceMap: false,
   configureWebpack: (config) => {
     return {
@@ -13,7 +13,7 @@ module.exports = {
         }
       }
     }
-  },*/
+  },
   css: {
     loaderOptions: {
       sass: {
