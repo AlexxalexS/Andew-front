@@ -1,14 +1,17 @@
 <template>
   <div class="portfolio">
+    <button @click="$router.push('/')">Назад</button>
+    <br>
     <h1>Галерея</h1>
+
     <br><br>
     <keep-alive>
-      <div class="post">
-        <div v-for="post in posts" :key="post.id">
-          <a class="post__content" :href="post.id">
-            <div class="post__title">{{ post.title.rendered }}</div>
-            <img class="post__image" :src="post.image" alt="">
-          </a>
+      <div class="post" v-if="!loader" >
+        <div v-for="post in posts" :key="post.ID">
+          <router-link class="post__content" :to="{ name: 'images', params: {images: post.acf.gallery, id: post.post_name}}" >
+            <img class="post__image" :src="post.acf.image.url" alt="">
+            <div class="post__title">{{ post.acf.title }}</div>
+          </router-link>
         </div>
       </div>
     </keep-alive>
@@ -16,13 +19,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Portfolio",
   data() {
     return {
-      posts: [],
       load: true
     };
   },
@@ -30,27 +32,22 @@ export default {
   methods: {
     ...mapActions({
       loadPosts: "wp/loadPosts",
-      loadImage: "wp/loadImagePost"
     })
   },
 
-  mounted() {
-    this.loadPosts()
-      .then((response) => {
-        let data = response.data;
-        data.forEach(item => {
-          this.loadImage({ id: item.featured_media })
-            .then((response) => {
-              item.image = response.data.guid.rendered;
-              this.posts.push(item);
-            });
-        });
-        console.log(this.posts);
-        this.load = false
-      })
-    .catch(() => {
-      this.load = false
+  computed: {
+    ...mapState({
+      posts: state => state.wp.posts,
+      loader: state => state.wp.loader
     })
+  },
+
+  watch: {
+    loader(first) {
+      if (!first) {
+        console.log(this.posts);
+      }
+    }
   }
 };
 </script>
@@ -68,6 +65,8 @@ export default {
   padding: 20px;
 
   &__content {
+    background: rgba(255,255,255,0.2);
+
     position: relative;
     text-decoration: none;
     border: 1px solid black;

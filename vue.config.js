@@ -11,9 +11,10 @@ module.exports = {
             changeOrigin: true
           }
         }
-      }
+      },
     }
   },
+
   css: {
     loaderOptions: {
       sass: {
