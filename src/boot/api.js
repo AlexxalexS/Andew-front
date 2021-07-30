@@ -6,7 +6,7 @@ Vue.use(VueAxios, axios);
 
 // export const BASE_URL = "wp-json/";
 
-export const API_URL = "wp-json/wp/v2/";
+export const API_URL = "wp-json/api/";
 
 const API = axios.create({
   withCredentials: false,
