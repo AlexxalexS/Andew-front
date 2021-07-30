@@ -1,27 +1,40 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import MainLayout from "../layouts/MainLayout";
 import Home from "../views/Home.vue";
 import ImagePalette from "../views/ImagePalette";
 import Portfolio from "../views/Portfolio";
+import Page404 from "../views/404"
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    component: MainLayout,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+      },
+      {
+        path: "/portfolio",
+        name: "Portfolio",
+        component: Portfolio
+      },
+      {
+        path: '/portfolio/:id',
+        name: "images",
+        props: true,
+        component: ImagePalette,
+      }
+    ]
   },
   {
-    path: "/portfolio",
-    name: "Portfolio",
-    component: Portfolio
-  },
-  {
-    path: '/:id',
-    name: "ImagePalette",
-    props: true,
-    component: ImagePalette,
+    path: "*",
+    name: "404",
+    component: Page404
   }
   // example
   /*
